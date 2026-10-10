@@ -119,7 +119,6 @@ public class Main {
     }
 
     private static void addProduct(ProductCatalog catalog, ShoppingApplication app) {
-        catalog.displayProducts();
 
         System.out.print(
                 TerminalColors.BLUE + "\nEnter product number (0 to cancel): "
