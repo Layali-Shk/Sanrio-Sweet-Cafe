@@ -59,7 +59,7 @@ public class ShoppingApplication {
     private void showCheckoutLoading() {
         String[] frames = {".", ".", ".", "<3"};
 
-        System.out.print("Processing your order ");
+        System.out.print(TerminalColors.YELLOW + "Processing your order " + TerminalColors.RESET);
 
         try {
             for (int i = 0; i < 3; i++) {
@@ -67,7 +67,7 @@ public class ShoppingApplication {
                     System.out.print(frame);
                     Thread.sleep(500);
                 }
-                System.out.print(" ");
+                System.out.print(TerminalColors.YELLOW + " " + TerminalColors.RESET);;
             }
 
             System.out.println();
