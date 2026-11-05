@@ -2,9 +2,10 @@
 import java.util.Scanner;
 
 public class Main {
-    private static Scanner scanner = new Scanner(System.in);
-
+    private static Scanner scanner;
     public static void main(String[] args) {
+        scanner = new Scanner(System.in);
+
         ProductCatalog catalog = new ProductCatalog();
 
         System.out.println(
@@ -115,7 +116,6 @@ public class Main {
             }
         }
 
-        scanner.close();
     }
 
     private static void addProduct(ProductCatalog catalog, ShoppingApplication app) {
