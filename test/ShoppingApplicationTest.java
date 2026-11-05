@@ -198,4 +198,20 @@ public class ShoppingApplicationTest {
 
         assertTrue(app.checkout());
     }
+    @Test
+    void testCheckoutWhenThreadIsInterrupted() {
+        Customer customer = new Customer("Layali", "IL");
+        ShoppingApplication app = new ShoppingApplication(customer);
+
+        app.getCart().addItem(new Item("Hello Kitty Latte", 5.50, 1));
+
+        Thread.currentThread().interrupt();
+
+        try {
+            assertTrue(app.checkout());
+            assertTrue(Thread.currentThread().isInterrupted());
+        } finally {
+            Thread.interrupted();
+        }
+    }
 }
