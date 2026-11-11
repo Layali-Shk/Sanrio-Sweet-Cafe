@@ -70,6 +70,7 @@ public class MainTest {
         }
 
     }
+
     @Test
     public void testAddProductSuccessfully() {
         String input = "Layali\nIL\n2\n1\n2\n3\n9\n";
@@ -199,6 +200,7 @@ public class MainTest {
 
         assertTrue(output.contains("Checkout failed:"));
     }
+
     @Test
     void testAddProductQuantityLessThanOne() {
         String input = "Layali\nIL\n2\n1\n0\n9\n";
@@ -207,6 +209,7 @@ public class MainTest {
 
         assertTrue(output.contains("Quantity must be at least 1."));
     }
+
     @Test
     void testAddProductQuantityNotANumber() {
         String input = "Layali\nIL\n2\n1\nabc\n9\n";
@@ -215,4 +218,295 @@ public class MainTest {
 
         assertTrue(output.contains("Quantity must be a whole number."));
     }
+
+    @Test
+    void testProgramDisplaysOpeningBanner() {
+        String input = "Layali\nIL\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("================================"));
+    }
+
+    @Test
+    void testProgramDisplaysCafeSubtitle() {
+        String input = "Layali\nIL\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Drinks, Sweets & Cute Things"));
+    }
+
+    @Test
+    void testProgramDisplaysClosingWelcomeBanner() {
+        String input = "Layali\nIL\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("================================"));
+    }
+
+    @Test
+    void testProgramDisplaysStatePrompt() {
+        String input = "Layali\nIL\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Enter your state (2-letter code):"));
+    }
+
+    @Test
+    void testProgramDisplaysClosingWelcomeMessage() {
+        String input = "Layali\nIL\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("We hope you find something you love!"));
+    }
+
+    @Test
+    void testProgramDisplaysMainMenuHeading() {
+        String input = "Layali\nIL\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("MAIN MENU"));
+    }
+
+    @Test
+    void testMainMenuDisplaysBrowseProductsOption() {
+        String input = "Layali\nIL\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("1. Browse products"));
+    }
+
+    @Test
+    void testMainMenuDisplaysAddProductOption() {
+        String input = "Layali\nIL\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("2. Add product to cart"));
+    }
+
+    @Test
+    void testMainMenuDisplaysViewCartOption() {
+        String input = "Layali\nIL\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("3. View shopping cart"));
+    }
+
+    @Test
+    void testMainMenuDisplaysEditQuantityOption() {
+        String input = "Layali\nIL\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("4. Edit item quantity"));
+    }
+
+    @Test
+    void testMainMenuDisplaysRemoveItemOption() {
+        String input = "Layali\nIL\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("5. Remove item from cart"));
+    }
+
+    @Test
+    void testMainMenuDisplaysCurrentTotalOption() {
+        String input = "Layali\nIL\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("6. View current total"));
+    }
+    @Test
+    void testMainMenuDisplaysChangeShippingOption() {
+        String input = "Layali\nIL\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("7. Change shipping option"));
+    }
+    @Test
+    void testMainMenuDisplaysCheckoutOption() {
+        String input = "Layali\nIL\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("8. Checkout"));
+    }
+    @Test
+    void testMainMenuDisplaysExitOption() {
+        String input = "Layali\nIL\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("9. Exit"));
+    }
+    @Test
+    void testMainMenuDisplaysChooseOptionPrompt() {
+        String input = "Layali\nIL\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Choose an option:"));
+    }
+    @Test
+    void testAddProductDisplaysProductNumberPrompt() {
+        String input = "Layali\nIL\n2\n0\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Enter product number (0 to cancel):"));
+    }
+    @Test
+    void testAddProductDisplaysQuantityPrompt() {
+        String input = "Layali\nIL\n2\n1\n1\n9\n";
+
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Enter quantity:"));
+    }
+    @Test
+    void testAddProductRejectsQuantityBelowOne() {
+        String input = "Layali\nIL\n2\n1\n0\n9\n";
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Quantity must be at least 1."));
+    }
+    @Test
+    void testAddProductSetsQuantity() {
+        String input = "Layali\nIL\n2\n1\n3\n3\n9\n";
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Hello Kitty Strawberry Latte"));
+        assertTrue(output.contains("Quantity: 3"));
+        assertTrue(output.contains("$16.50"));
+    }
+    @Test
+    void testEditQuantityDisplaysProductNamePrompt() {
+        String input = "Layali\nIL\n4\nHello Kitty Latte\n2\n9\n";
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Enter the product name to edit:"));
+    }
+    @Test
+    void testEditQuantityDisplaysNewQuantityPrompt() {
+        String input = "Layali\nIL\n4\nHello Kitty Latte\n2\n9\n";
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Enter the new quantity:"));
+    }
+    @Test
+    void testEditQuantityRejectsQuantityBelowOne() {
+        String input = "Layali\nIL\n4\nHello Kitty Latte\n0\n9\n";
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Quantity must be at least 1."));
+    }
+    @Test
+    void testRemoveItemDisplaysProductNamePrompt() {
+        String input = "Layali\nIL\n5\nHello Kitty Latte\n9\n";
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Enter the product name to remove:"));
+    }
+    @Test
+    void testShippingDisplaysOptionsHeading() {
+        String input = "Layali\nIL\n7\n1\n9\n";
+        String output = runProgram(input);
+
+        assertTrue(output.contains("SHIPPING OPTIONS"));
+    }
+    @Test
+    void testShippingDisplaysStandardOption() {
+        String input = "Layali\nIL\n7\n1\n9\n";
+        String output = runProgram(input);
+
+        assertTrue(output.contains("1. STANDARD - $10, free over $50"));
+    }
+    @Test
+    void testShippingDisplaysNextDayOption() {
+        String input = "Layali\nIL\n7\n1\n9\n";
+        String output = runProgram(input);
+
+        assertTrue(output.contains("2. NEXT_DAY - $25"));
+    }
+    @Test
+    void testShippingDisplaysChoosePrompt() {
+        String input = "Layali\nIL\n7\n1\n9\n";
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Choose shipping:"));
+    }
+    @Test
+    void testStandardShippingIsSelected() {
+        String input = "Layali\nIL\n7\n1\n9\n";
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Standard shipping selected."));
+    }
+    @Test
+    void testNextDayShippingIsSelected() {
+        String input = "Layali\nIL\n7\n2\n9\n";
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Next-day shipping selected."));
+    }
+    @Test
+    void testWelcomeDisplaysBothSeparators() {
+        String input = "Layali\nIL\n9\n";
+        String output = runProgram(input);
+
+        int count = output.split("================================", -1).length - 1;
+
+        assertTrue(count >= 2);
+    }
+    @Test
+    void testAddProductAcceptsQuantityOne() {
+        String input = "Layali\nIL\n2\n1\n1\n3\n9\n";
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Enter quantity:"));
+        assertTrue(output.contains("Hello Kitty"));
+    }
+    @Test
+    void testEditQuantityAcceptsQuantityOne() {
+        String input = "Layali\nIL\n2\n1\n2\n4\nHello Kitty Strawberry Latte\n1\n9\n";
+        String output = runProgram(input);
+
+        assertFalse(output.contains("Quantity must be at least 1."));
+    }
+    @Test
+    void testProgramDisplaysNamePrompt() {
+        String input = "Layali\nIL\n9\n";
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Enter your name:"));
+    }
+    @Test
+    void testStandardShippingSelectionChangesShippingCost() {
+        String input = "Layali\nIL\n7\n2\n7\n1\n6\n9\n";
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Standard shipping selected."));
+        assertTrue(output.contains("$10.00"));
+    }
+
+    @Test
+    void testNextDayShippingSelectionChangesShippingCost() {
+        String input = "Layali\nIL\n7\n1\n7\n2\n6\n9\n";
+        String output = runProgram(input);
+
+        assertTrue(output.contains("Next-day shipping selected."));
+        assertTrue(output.contains("$25.00"));
+    }
+
 }
