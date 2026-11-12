@@ -1,6 +1,9 @@
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 
 public class ShoppingApplicationTest {
 
@@ -189,6 +192,7 @@ public class ShoppingApplicationTest {
         assertFalse(app.checkout());
     }
 
+
     @Test
     public void testSuccessfulCheckout() {
         ShoppingApplication app =
@@ -196,8 +200,38 @@ public class ShoppingApplicationTest {
 
         app.getCart().addItem(new Item("Cake", 10.00, 1));
 
-        assertTrue(app.checkout());
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream originalOutput = System.out;
+
+        long startTime = System.nanoTime();
+
+        try {
+            System.setOut(new PrintStream(output));
+            assertTrue(app.checkout());
+        } finally {
+            System.setOut(originalOutput);
+        }
+
+        long elapsedTime = (System.nanoTime() - startTime) / 1_000_000;
+
+        // Remove ANSI color codes
+        String result = output.toString().replaceAll("\033\\[[;\\d]*m", "");
+
+        // Check loading animation
+        assertTrue(result.contains("Processing your order"));
+        assertEquals(9L, result.chars().filter(c -> c == '.').count());
+        assertEquals(3, result.split("<3", -1).length - 1);
+
+        // Check spacing and newline after animation
+        assertTrue(result.contains("<3 " + System.lineSeparator()));
+        // Check checkout confirmation
+        assertTrue(result.contains("Transaction completed!"));
+        assertTrue(result.contains("Thank you for ordering with Sanrio Sweet Cafe!"));
+        assertTrue(result.contains("We hope to see you again soon!"));
+        // Check loading animation delay
+        assertTrue(elapsedTime >= 5500);
     }
+
     @Test
     void testCheckoutWhenThreadIsInterrupted() {
         Customer customer = new Customer("Layali", "IL");
